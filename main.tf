@@ -18,7 +18,7 @@ locals {
 }
 
 data "azurerm_virtual_network" "hub_vnet" {
-  count = var.hub_vnet_name ? 1 : 0
+  count = var.hub_vnet_name != null ? 1 : 0
   provider            = azurerm.connectivity
   name                = var.hub_vnet_name
   resource_group_name = var.hub_vnet_resource_group_name
