@@ -31,7 +31,7 @@ variable "vnet_address_space" {
 }
 
 variable "subnets" {
-  type        = map(object({
+  type = map(object({
     address_prefix = string
   }))
   description = "Subnets to create in Spoke virtual network"

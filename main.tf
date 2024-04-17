@@ -18,7 +18,7 @@ locals {
 }
 
 data "azurerm_virtual_network" "hub_vnet" {
-  count = var.hub_vnet_name != null ? 1 : 0
+  count               = var.hub_vnet_name != null ? 1 : 0
   provider            = azurerm.connectivity
   name                = var.hub_vnet_name
   resource_group_name = var.hub_vnet_resource_group_name
@@ -84,6 +84,7 @@ resource "azurerm_subnet_route_table_association" "spoke" {
 }
 
 resource "azurerm_virtual_network_peering" "spoke_hub" {
+  count                     = var.hub_vnet_name != null ? 1 : 0
   name                      = "${lower(var.landingzone_name)}-hub"
   resource_group_name       = azurerm_resource_group.network.name
   virtual_network_name      = azurerm_virtual_network.spoke.name
@@ -95,7 +96,7 @@ resource "azurerm_virtual_network_peering" "spoke_hub" {
 
 
 resource "azurerm_virtual_network_peering" "hub_spoke" {
-  count                     = var.hub_vnet_name ? 1 : 0
+  count                     = var.hub_vnet_name != null ? 1 : 0
   provider                  = azurerm.connectivity
   name                      = "hub-${lower(var.landingzone_name)}"
   resource_group_name       = data.azurerm_virtual_network.hub_vnet[0].resource_group_name
