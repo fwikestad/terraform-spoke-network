@@ -87,7 +87,7 @@ resource "azurerm_virtual_network_peering" "spoke_hub" {
   name                      = "${lower(var.landingzone_name)}-hub"
   resource_group_name       = azurerm_resource_group.network.name
   virtual_network_name      = azurerm_virtual_network.spoke.name
-  remote_virtual_network_id = data.azurerm_virtual_network.hub_vnet.id
+  remote_virtual_network_id = data.azurerm_virtual_network.hub_vnet[0].id
 
   use_remote_gateways     = true
   allow_forwarded_traffic = true
@@ -98,8 +98,8 @@ resource "azurerm_virtual_network_peering" "hub_spoke" {
   count                     = var.hub_vnet_name ? 1 : 0
   provider                  = azurerm.connectivity
   name                      = "hub-${lower(var.landingzone_name)}"
-  resource_group_name       = data.azurerm_virtual_network.hub_vnet.resource_group_name
-  virtual_network_name      = data.azurerm_virtual_network.hub_vnet.name
+  resource_group_name       = data.azurerm_virtual_network.hub_vnet[0].resource_group_name
+  virtual_network_name      = data.azurerm_virtual_network.hub_vnet[0].name
   remote_virtual_network_id = azurerm_virtual_network.spoke.id
 
   allow_gateway_transit = true
