@@ -5,7 +5,7 @@ Will also create peering to a hub if hub_vnet_name and hub_vnet_resource_group_n
 
 ## !NB Be sure to set providers
 azurerm = Your LZ Subscription to deploy network in
-azurerm = Connectivity subscription
+azurerm.connectivity = Connectivity subscription containing hub
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
