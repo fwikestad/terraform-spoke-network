@@ -4,7 +4,8 @@ Create a spoke virtual network, NSG and Route Table.
 Will also create peering to a hub if hub_vnet_name and hub_vnet_resource_group_name is provided.
 
 ## !NB Be sure to set providers
-azurerm = Your LZ Subscription to deploy network in
+azurerm = Your LZ Subscription to deploy network in (No need to add if az account is set to right subscription)
+
 azurerm.connectivity = Connectivity subscription containing hub
 
 <!-- BEGIN_TF_DOCS -->
